@@ -3,26 +3,24 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
+      User.hasOne(models.Status);
+      User.hasMany(model.userRole, { forignKey: "userId" });
       User.belongsToMany(models.Role, {
-        through: "userModels",
-        as: "models",
-        foreignKey: "user_id",
-      }),
-        User.hasMany(models.Status, {
-          foreignKey: "user_id",
-          as: "status ",
-        });
+        through: "userRoles",
+        foreignKey: "userId",
+      });
     }
   }
   User.init(
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
       },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      // alamat:DataTypes.STRING
     },
     {
       sequelize,

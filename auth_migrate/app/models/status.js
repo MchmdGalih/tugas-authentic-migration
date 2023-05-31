@@ -3,9 +3,10 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Status extends Model {
     static associate(models) {
-      Status.belongsTo(models.User, {
+      Status.belongsTo(models.user, {
         foreignKey: "user_id",
-        as: "users",
+        onDelete: "CASCADE",
+        onUpdate: "RESTRICT",
       });
     }
   }
@@ -13,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
       user_id: DataTypes.STRING,

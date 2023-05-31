@@ -10,7 +10,6 @@ module.exports = {
   signup(req, res) {
     return User.create({
       name: req.body.name,
-      id: req.body.id,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     })
@@ -26,7 +25,7 @@ module.exports = {
             user.setRoles(roles).then(() => {
               res.status(200).send({
                 auth: true,
-                id: req.body.id,
+                id: user.id,
                 message: "User registered successfully!",
                 errors: null,
               });
@@ -43,7 +42,7 @@ module.exports = {
       .catch((err) => {
         res.status(500).send({
           auth: false,
-          id: req.body.id,
+          nama: req.body.name,
           message: "Error",
           errors: err,
         });
@@ -53,7 +52,7 @@ module.exports = {
   signin(req, res) {
     return User.findOne({
       where: {
-        id: req.body.id,
+        email: req.body.email,
       },
     })
       .then((user) => {

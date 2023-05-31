@@ -6,13 +6,13 @@ module.exports = {
   checkDuplicateUserNameOrEmail(req, res, next) {
     User.findOne({
       where: {
-        id: req.body.id,
+        name: req.body.name,
       },
     }).then((user) => {
       if (user) {
         res.status(400).send({
           auth: false,
-          id: req.body.id,
+          name: req.body.name,
           message: "Error",
           errors: "Id is already taken!",
         });
@@ -27,7 +27,7 @@ module.exports = {
         if (user) {
           res.status(400).send({
             auth: false,
-            id: req.body.id,
+            name: req.body.name,
             message: "Error",
             errors: "Email is already taken!",
           });
