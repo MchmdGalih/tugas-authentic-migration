@@ -39,7 +39,7 @@ module.exports = {
     });
     await queryInterface.addConstraint("Users", {
       fields: ["role"],
-      type: "foreing key",
+      type: "foreign key",
       name: "fk_role_id",
       references: {
         table: "Roles",
